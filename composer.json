@@ -1,0 +1,17 @@
+{
+    "name": "RBM/CelumImagineSdk",
+    "description": "Celum Imagine PHP SDK",
+    "authors": [
+        {
+            "name": "Romain Bessuges",
+            "email": "romainbessuges@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "RBM": "library/."
+        }
+    }
+}
