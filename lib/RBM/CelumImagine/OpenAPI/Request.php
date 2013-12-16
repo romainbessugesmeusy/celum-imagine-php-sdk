@@ -25,6 +25,22 @@ class Request
      */
     public function call()
     {
+        $url = $this->getUrl();
+        $xmlString = file_get_contents($url);
+
+        if (strpos($xmlString, '<?xml version="1.0" encoding="UTF-8"?>') === 0) {
+            $response = new Response($xmlString);
+            return $response;
+        }
+
+        return $xmlString;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
         $params = array_merge($this->parameters, [
             "username" => $this->username,
             "password" => $this->password,
@@ -43,16 +59,7 @@ class Request
 
         $query = http_build_query($params);
 
-        $uri = "{$this->url}/api/{$this->function}.api?$query";
-
-        $xmlString = file_get_contents($uri);
-
-        if (strpos($xmlString, '<?xml version="1.0" encoding="UTF-8"?>') === 0) {
-            $response = new Response($xmlString);
-            return $response;
-        }
-
-        return $xmlString;
+        return "{$this->url}/api/{$this->function}.api?$query";
     }
 
     /**
